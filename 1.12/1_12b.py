@@ -1,40 +1,29 @@
-pairs= []
-def find_two_lowest_in_columns(filename):
-    """
-    Find the two lowest numbers in each column of a tab-delimited file.
+
+def find_sum_of_similarities(filename : str):
+
+   
+    left: int=[] 
+    right: int=[]
+    dis: int=[]
+   
+   
+        
+    with open(filename, 'r') as file:
     
-    :param filename: Path to the text file.
-    :return: A list of tuples where each tuple contains the two lowest numbers in a column.
-    """
-   
-    left=[]
-    right=[]
-    dis=[]
-   
-    try:
+        for line in file:
+            parts = line.strip().split('   ')  
+            left.append(int(parts[0]))
+            right.append(int(parts[1]))
+                
+    
+    for element_in_left in left:
+        if right.count(element_in_left):
+            dis.append(element_in_left*right.count(element_in_left))
         
-        with open(filename, 'r') as file:
-        
-            for line in file:
-                parts = line.strip().split('   ')  # Split the line by tabs
-                left.append(int(parts[0]))
-                right.append(int(parts[1]))
+    return sum(dis)
                     
-        
-        for element_in_left in left:
-            if right.count(element_in_left):
-                dis.append(element_in_left*right.count(element_in_left))
-            
-        return sum(dis)
-                    
-        
 
-    except FileNotFoundError:
-        print("File not found.")
-        return None
-
-# Example usage:
-filename = "data_b"  # Replace with your file name
+filename = "data_b"  
 
 
-print(f"Distance is {find_two_lowest_in_columns(filename)}")
+print(f"Distance is {find_sum_of_similarities(filename)}")
